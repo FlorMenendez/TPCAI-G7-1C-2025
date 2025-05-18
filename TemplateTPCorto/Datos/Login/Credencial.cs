@@ -9,30 +9,33 @@ namespace Datos
 {
     public class Credencial
     {
-        private String _legajo;
-        private String _nombreUsuario;
-        private String _contrasena;
-        private DateTime _fechaAlta;
-        private DateTime _fechaUltimoLogin;
+        public string Legajo { get; set; }
+        public string NombreUsuario { get; set; }
+        public string Contrasena { get; set; }
+        public DateTime FechaAlta { get; set; }
+        public DateTime FechaUltimoLogin { get; set; }
 
-        public string Legajo { get => _legajo; set => _legajo = value; }
-        public string NombreUsuario { get => _nombreUsuario; set => _nombreUsuario = value; }
-        public string Contrasena { get => _contrasena; set => _contrasena = value; }
-        public DateTime FechaAlta { get => _fechaAlta; set => _fechaAlta = value; }
-        public DateTime FechaUltimoLogin { get => _fechaUltimoLogin; set => _fechaUltimoLogin = value; }
+        public Credencial() { }
 
-
-        public Credencial(String registro)
+        public Credencial(string registro)
         {
-            String[] datos = registro.Split(';');
-            this._legajo = datos[0];
-            this._nombreUsuario = datos[1];
-            this._contrasena = datos[2];
-            this._fechaAlta = DateTime.ParseExact(datos[3], "d/M/yyyy", CultureInfo.InvariantCulture);
-            this._fechaUltimoLogin = DateTime.ParseExact(datos[4], "d/M/yyyy", CultureInfo.InvariantCulture);
+            string[] datos = registro.Split(';');
 
-
+            if (datos.Length >= 5)
+            {
+                Legajo = datos[0];
+                NombreUsuario = datos[1];
+                Contrasena = datos[2];
+                FechaAlta = DateTime.ParseExact(datos[3], "d/M/yyyy", CultureInfo.InvariantCulture);
+                if (string.IsNullOrWhiteSpace(datos[4]))
+                {
+                    FechaUltimoLogin = DateTime.MinValue;
+                }
+                else
+                {
+                    FechaUltimoLogin = DateTime.ParseExact(datos[4], "d/M/yyyy", CultureInfo.InvariantCulture);
+                }
+            }
         }
-
     }
 }
