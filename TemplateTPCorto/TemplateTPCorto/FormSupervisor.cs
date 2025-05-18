@@ -30,7 +30,8 @@ namespace TemplateTPCorto
 
         private void btnDesbloquearCredencial_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Acá iría la funcionalidad para desbloquear credenciales.");
+            FormDesbloquearCredencial form = new FormDesbloquearCredencial();
+            form.ShowDialog();
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)

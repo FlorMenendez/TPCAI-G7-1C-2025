@@ -47,11 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAdministrador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdministrador.Designer.cs">
+      <DependentUpon>FormAdministrador.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCambioClave.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormCambioClave.Designer.cs">
       <DependentUpon>FormCambioClave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDesbloquearCredencial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDesbloquearCredencial.Designer.cs">
+      <DependentUpon>FormDesbloquearCredencial.cs</DependentUpon>
     </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
@@ -65,6 +77,12 @@
     <Compile Include="FormModificarPersona.Designer.cs">
       <DependentUpon>FormModificarPersona.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOperador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOperador.Designer.cs">
+      <DependentUpon>FormOperador.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSupervisor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,8 +91,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAdministrador.resx">
+      <DependentUpon>FormAdministrador.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCambioClave.resx">
       <DependentUpon>FormCambioClave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDesbloquearCredencial.resx">
+      <DependentUpon>FormDesbloquearCredencial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
