@@ -30,7 +30,8 @@ namespace TemplateTPCorto
             {
                 if (loginNegocio.EstaBloqueado(usuario))
                 {
-                    MessageBox.Show("El usuario está bloqueado por exceso de intentos fallidos.");
+                    lblMensaje.Text = "El usuario está bloqueado por exceso de intentos fallidos.";
+                    lblMensaje.Visible = true;
                     return;
                 }
 
@@ -53,6 +54,12 @@ namespace TemplateTPCorto
                     if (perfil != null)
                     {
                         MessageBox.Show($"Bienvenido {credencial.NombreUsuario}. Accediste como {perfil.Nombre}");
+                        if (perfil.Nombre == "Supervisor")
+                        {
+                            FormSupervisor formSupervisor = new FormSupervisor();
+                            formSupervisor.Show();
+                            this.Hide();
+                        }
                     }
                     else
                     {
@@ -66,7 +73,8 @@ namespace TemplateTPCorto
                 }
                 else
                 {
-                    MessageBox.Show("Usuario o contraseña incorrectos. Se ha registrado el intento fallido.");
+                    lblMensaje.Text = "Usuario o contraseña incorrectos.";
+                    lblMensaje.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -86,6 +94,11 @@ namespace TemplateTPCorto
         }
 
         private void FormLogin_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblMensaje_Click(object sender, EventArgs e)
         {
 
         }

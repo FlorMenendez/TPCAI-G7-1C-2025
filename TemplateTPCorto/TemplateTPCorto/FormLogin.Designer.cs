@@ -34,12 +34,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnIngresar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblMensaje = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtUsuario
             // 
             this.txtUsuario.Location = new System.Drawing.Point(159, 99);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(149, 20);
             this.txtUsuario.TabIndex = 0;
@@ -47,7 +48,7 @@
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(159, 140);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(149, 20);
             this.txtPassword.TabIndex = 1;
@@ -74,8 +75,8 @@
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(37, 181);
-            this.btnIngresar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnIngresar.Location = new System.Drawing.Point(38, 196);
+            this.btnIngresar.Margin = new System.Windows.Forms.Padding(2);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(291, 40);
             this.btnIngresar.TabIndex = 4;
@@ -94,18 +95,31 @@
             this.label3.Text = "Plataforma de Gestión Interna";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
+            // lblMensaje
+            // 
+            this.lblMensaje.AutoSize = true;
+            this.lblMensaje.ForeColor = System.Drawing.Color.Red;
+            this.lblMensaje.Location = new System.Drawing.Point(156, 166);
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(57, 13);
+            this.lblMensaje.TabIndex = 6;
+            this.lblMensaje.Text = "lblMensaje";
+            this.lblMensaje.Visible = false;
+            this.lblMensaje.Click += new System.EventHandler(this.lblMensaje_Click);
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(360, 267);
+            this.Controls.Add(this.lblMensaje);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsuario);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormLogin";
             this.Text = "Iniciar Sesión";
             this.Load += new System.EventHandler(this.FormLogin_Load_1);
@@ -122,6 +136,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblMensaje;
     }
 }
 
