@@ -21,11 +21,72 @@ namespace TemplateTPCorto
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            String usuario = txtUsuario.Text;
-            String password = txtPassword.Text;
+            string usuario = txtUsuario.Text;
+            string password = txtPassword.Text;
 
             LoginNegocio loginNegocio = new LoginNegocio();
-            Credencial credencial = loginNegocio.login(usuario, password);
+
+            try
+            {
+                if (loginNegocio.EstaBloqueado(usuario))
+                {
+                    MessageBox.Show("El usuario está bloqueado por exceso de intentos fallidos.");
+                    return;
+                }
+
+                Credencial credencial = loginNegocio.login(usuario, password);
+
+                if (credencial != null)
+                {
+                    // Si nunca inició sesión o pasaron más de 30 días
+                    if (credencial.FechaUltimoLogin == DateTime.MinValue ||
+                        (DateTime.Now - credencial.FechaUltimoLogin).TotalDays > 30)
+                    {
+                        MessageBox.Show("La contraseña ha expirado o nunca iniciaste sesión. Debes cambiarla.");
+                        FormCambioClave cambioClave = new FormCambioClave(credencial);
+                        cambioClave.ShowDialog();
+                        return;
+                    }
+
+                    Perfil perfil = loginNegocio.ObtenerPerfilPorLegajo(credencial.Legajo);
+
+                    if (perfil != null)
+                    {
+                        MessageBox.Show($"Bienvenido {credencial.NombreUsuario}. Accediste como {perfil.Nombre}");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Bienvenido {credencial.NombreUsuario}. No se pudo identificar tu perfil.");
+                    }
+
+                    // Abrís el siguiente formulario si querés
+                    // PrincipalForm principal = new PrincipalForm();
+                    // principal.Show();
+                    // this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario o contraseña incorrectos. Se ha registrado el intento fallido.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al intentar iniciar sesión: " + ex.Message);
+            }
+        }
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+            // No hace falta poner nada acá por ahora
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormLogin_Load_1(object sender, EventArgs e)
+        {
 
         }
     }
