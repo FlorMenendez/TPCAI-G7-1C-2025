@@ -72,7 +72,7 @@
             this.Controls.Add(this.btnDesbloquearCredencial);
             this.Controls.Add(this.btnCerrarSesion);
             this.Name = "FormSupervisor";
-            this.Text = "FormSupervisor";
+            this.Text = "Menú Supervisor";
             this.Load += new System.EventHandler(this.FormSupervisor_Load);
             this.ResumeLayout(false);
 

@@ -61,6 +61,17 @@ namespace TemplateTPCorto
             }
             System.IO.File.WriteAllLines(pathCredenciales, lineas);
 
+            // Eliminar al usuario del archivo de bloqueados
+            string pathBloqueados = @"..\..\..\Persistencia\DataBase\Tablas\usuario_bloqueado.csv";
+            if (System.IO.File.Exists(pathBloqueados))
+            {
+                var bloqueados = System.IO.File.ReadAllLines(pathBloqueados).ToList();
+                var nuevosBloqueados = bloqueados
+                    .Where(u => !u.Trim().Equals(usuarioEncontrado.Trim(), StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                System.IO.File.WriteAllLines(pathBloqueados, nuevosBloqueados);
+            }
+
             MessageBox.Show("Contraseña actualizada correctamente. El usuario deberá cambiarla en su próximo ingreso.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Limpia y deshabilita controles
@@ -124,7 +135,17 @@ namespace TemplateTPCorto
 
         private void btnSalirDC_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
+        }
+
+        private void FormDesbloquearCredencial_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

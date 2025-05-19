@@ -53,11 +53,24 @@ namespace TemplateTPCorto
 
                     if (perfil != null)
                     {
-                        MessageBox.Show($"Bienvenido {credencial.NombreUsuario}. Accediste como {perfil.Nombre}");
                         if (perfil.Nombre == "Supervisor")
                         {
                             FormSupervisor formSupervisor = new FormSupervisor();
                             formSupervisor.Show();
+                            this.Hide();
+                        }
+
+                        if (perfil.Nombre == "Administrador")
+                        {
+                            FormAdministrador formAdministrador = new FormAdministrador();
+                            formAdministrador.Show();
+                            this.Hide();
+                        }
+
+                        if (perfil.Nombre == "Operador")
+                        {
+                            FormOperador formOperador = new FormOperador();
+                            formOperador.Show();
                             this.Hide();
                         }
                     }
@@ -66,10 +79,6 @@ namespace TemplateTPCorto
                         MessageBox.Show($"Bienvenido {credencial.NombreUsuario}. No se pudo identificar tu perfil.");
                     }
 
-                    // Abrís el siguiente formulario si querés
-                    // PrincipalForm principal = new PrincipalForm();
-                    // principal.Show();
-                    // this.Hide();
                 }
                 else
                 {

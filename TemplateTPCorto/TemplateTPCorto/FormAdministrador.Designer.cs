@@ -29,26 +29,39 @@
         private void InitializeComponent()
         {
             this.btnAutorizaciones = new System.Windows.Forms.Button();
+            this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAutorizaciones
             // 
-            this.btnAutorizaciones.Location = new System.Drawing.Point(220, 138);
-            this.btnAutorizaciones.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAutorizaciones.Location = new System.Drawing.Point(38, 41);
             this.btnAutorizaciones.Name = "btnAutorizaciones";
-            this.btnAutorizaciones.Size = new System.Drawing.Size(285, 48);
+            this.btnAutorizaciones.Size = new System.Drawing.Size(214, 39);
             this.btnAutorizaciones.TabIndex = 3;
             this.btnAutorizaciones.Text = "Autorizaciones";
             this.btnAutorizaciones.UseVisualStyleBackColor = true;
+            this.btnAutorizaciones.Click += new System.EventHandler(this.btnAutorizaciones_Click);
+            // 
+            // btnCerrarSesion
+            // 
+            this.btnCerrarSesion.Location = new System.Drawing.Point(38, 173);
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.Size = new System.Drawing.Size(214, 39);
+            this.btnCerrarSesion.TabIndex = 4;
+            this.btnCerrarSesion.Text = "Cerrar Sesión";
+            this.btnCerrarSesion.UseVisualStyleBackColor = true;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
             // FormAdministrador
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(287, 265);
+            this.Controls.Add(this.btnCerrarSesion);
             this.Controls.Add(this.btnAutorizaciones);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormAdministrador";
-            this.Text = "FormAdministrador";
+            this.Text = "Menú Administrador";
             this.ResumeLayout(false);
 
         }
@@ -56,5 +69,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnAutorizaciones;
+        private System.Windows.Forms.Button btnCerrarSesion;
     }
 }

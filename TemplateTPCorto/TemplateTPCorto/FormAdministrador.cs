@@ -16,5 +16,17 @@ namespace TemplateTPCorto
         {
             InitializeComponent();
         }
+
+        private void btnAutorizaciones_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            FormLogin loginForm = new FormLogin();
+            loginForm.Show();
+            this.Close();
+        }
     }
 }
