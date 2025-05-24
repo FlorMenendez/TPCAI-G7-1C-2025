@@ -81,49 +81,49 @@ namespace TemplateTPCorto
             dtpFechaIngreso.Format = DateTimePickerFormat.Short;
             dtpFechaIngreso.Value = seleccionada.FechaIngreso;
         }
-
-
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (cmbPersonas.SelectedItem == null)
+            // 1) Validación
+            if (cmbPersonas.SelectedIndex == -1)
             {
                 MessageBox.Show("Seleccioná una persona primero.");
                 return;
             }
 
+            // 2) Actualizar en memoria
             Persona seleccionada = (Persona)cmbPersonas.SelectedItem;
-
-            // Actualizamos los valores
-            seleccionada.Nombre = txtNombre.Text;
-            seleccionada.Apellido = txtApellido.Text;
-
-            int dni;
-            if (!int.TryParse(txtDNI.Text, out dni))
+            seleccionada.Nombre = txtNombre.Text.Trim();
+            seleccionada.Apellido = txtApellido.Text.Trim();
+            if (!int.TryParse(txtDNI.Text.Trim(), out int dni))
             {
                 MessageBox.Show("El DNI debe ser un número válido.");
                 return;
             }
             seleccionada.Dni = dni;
-
             seleccionada.FechaIngreso = dtpFechaIngreso.Value;
 
-            // Sobrescribimos el archivo
-            string path = @"..\..\..\Persistencia\DataBase\Tablas\persona.csv";
-
-            if (File.Exists(path))
+            // 3) Guardar operación pendiente en operacion_cambio_persona.csv
+            string pathOpPers = @"..\..\..\Persistencia\DataBase\Tablas\operacion_cambio_persona.csv";
+            if (!File.Exists(pathOpPers))
             {
-                List<string> nuevasLineas = new List<string>();
-                nuevasLineas.Add("legajo;nombre;apellido;dni;fecha_ingreso"); // encabezado
-
-                foreach (var persona in personas)
+                // Creo el archivo con encabezado y primera operación (ID=1)
+                File.WriteAllLines(pathOpPers, new[]
                 {
-                    nuevasLineas.Add(persona.ToString());
-                }
-
-                File.WriteAllLines(path, nuevasLineas);
-                MessageBox.Show("Datos actualizados correctamente.");
+            "idOperacion;legajo;nombre;apellido;dni;fecha_ingreso",
+            $"1;{seleccionada.Legajo};{seleccionada.Nombre};{seleccionada.Apellido};{seleccionada.Dni};{seleccionada.FechaIngreso:d/M/yyyy}"
+        });
             }
+            else
+            {
+                // Agrego una nueva línea al final
+                var todas = File.ReadAllLines(pathOpPers);
+                int nuevoId = todas.Length; // 1 encabezado + operaciones previas = número de líneas
+                string opLine = $"{nuevoId};{seleccionada.Legajo};{seleccionada.Nombre};{seleccionada.Apellido};{seleccionada.Dni};{seleccionada.FechaIngreso:d/M/yyyy}";
+                File.AppendAllLines(pathOpPers, new[] { opLine });
+            }
+
+            MessageBox.Show("La modificación ha quedado pendiente de aprobación por el Administrador.");
+            this.Close();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
