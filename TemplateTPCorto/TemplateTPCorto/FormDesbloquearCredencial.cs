@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace TemplateTPCorto
 {
@@ -38,43 +39,72 @@ namespace TemplateTPCorto
 
         private void btnDC_Click(object sender, EventArgs e)
         {
+            // 1) Validaciones iniciales
             if (legajoEncontrado == null && usuarioEncontrado == null)
                 return;
 
             string nuevaClave = txtNuevaContraseñaDC.Text.Trim();
-            if (string.IsNullOrEmpty(nuevaClave))
-                return;
-
-            var lineas = System.IO.File.ReadAllLines(pathCredenciales);
-            for (int i = 1; i < lineas.Length; i++)
+            if (string.IsNullOrEmpty(nuevaClave) || nuevaClave.Length < 8)
             {
-                var partes = lineas[i].Split(';');
-                if ((legajoEncontrado != null && partes[0] == legajoEncontrado) ||
-                    (usuarioEncontrado != null && partes[1] == usuarioEncontrado))
+                MessageBox.Show("La nueva contraseña debe tener al menos 8 caracteres.");
+                return;
+            }
+
+            // 2) Leer datos originales de la credencial
+            //    para obtener legajo, fechaAlta e idPerfil
+            string[] credLineas = File.ReadAllLines(pathCredenciales);
+            string fechaAlta = "";
+            string idPerfil = "";
+            foreach (var lin in credLineas.Skip(1))
+            {
+                var c = lin.Split(';');
+                if (c.Length >= 6 && c[1] == usuarioEncontrado)
                 {
-                    // Actualiza la contraseña y deja fechaUltimoLogin vacía
-                    partes[2] = nuevaClave;
-                    partes[4] = "";
-                    lineas[i] = string.Join(";", partes);
+                    fechaAlta = c[3];
+                    idPerfil = c[5];  // si tu CSV tiene el idPerfil en la columna 6
                     break;
                 }
             }
-            System.IO.File.WriteAllLines(pathCredenciales, lineas);
 
-            // Eliminar al usuario del archivo de bloqueados
-            string pathBloqueados = @"..\..\..\Persistencia\DataBase\Tablas\usuario_bloqueado.csv";
-            if (System.IO.File.Exists(pathBloqueados))
+            // 3) Registrar la operación pendiente en operacion_cambio_credencial.csv
+            string pathOpCred = @"..\..\..\Persistencia\DataBase\Tablas\operacion_cambio_credencial.csv";
+            if (!File.Exists(pathOpCred))
             {
-                var bloqueados = System.IO.File.ReadAllLines(pathBloqueados).ToList();
-                var nuevosBloqueados = bloqueados
-                    .Where(u => !u.Trim().Equals(usuarioEncontrado.Trim(), StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-                System.IO.File.WriteAllLines(pathBloqueados, nuevosBloqueados);
+                // crear archivo con encabezado + primera operación (ID=1)
+                File.WriteAllLines(pathOpCred, new[]
+                {
+            "idOperacion;legajo;nombreUsuario;contrasena;idPerfil;fechaAlta;fechaUltimoLogin",
+            $"1;{legajoEncontrado};{usuarioEncontrado};{nuevaClave};{idPerfil};{fechaAlta};"
+        });
+            }
+            else
+            {
+                // Calculo el nuevo ID
+                var existentes = File.ReadAllLines(pathOpCred);
+                int nuevoId = existentes.Length;
+
+                // Preparo la línea
+                string opLine = $"{nuevoId};{legajoEncontrado};{usuarioEncontrado};{nuevaClave};{idPerfil};{fechaAlta};";
+
+                // Añado la línea precedida de un salto de línea para que no se pegue al encabezado
+                File.AppendAllText(pathOpCred, Environment.NewLine + opLine);
             }
 
-            MessageBox.Show("Contraseña actualizada correctamente. El usuario deberá cambiarla en su próximo ingreso.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // 4) Sacar al usuario de usuario_bloqueado.csv
+            string pathBloq = @"..\..\..\Persistencia\DataBase\Tablas\usuario_bloqueado.csv";
+            if (File.Exists(pathBloq))
+            {
+                var sinEste = File.ReadAllLines(pathBloq)
+                                 .Where(u => !u.Trim().Equals(usuarioEncontrado, StringComparison.OrdinalIgnoreCase))
+                                 .ToArray();
+                File.WriteAllLines(pathBloq, sinEste);
+            }
 
-            // Limpia y deshabilita controles
+            // 5) Mensaje y limpieza de controles
+            MessageBox.Show(
+               "El desbloqueo ha quedado pendiente de aprobación por el Administrador.",
+               "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             txtLegajoDC.Clear();
             txtUsuarioDC.Clear();
             txtNuevaContraseñaDC.Clear();
