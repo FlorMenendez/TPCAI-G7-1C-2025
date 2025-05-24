@@ -34,7 +34,7 @@
             // 
             // btnAutorizaciones
             // 
-            this.btnAutorizaciones.Location = new System.Drawing.Point(38, 41);
+            this.btnAutorizaciones.Location = new System.Drawing.Point(38, 73);
             this.btnAutorizaciones.Name = "btnAutorizaciones";
             this.btnAutorizaciones.Size = new System.Drawing.Size(214, 39);
             this.btnAutorizaciones.TabIndex = 3;
@@ -44,7 +44,7 @@
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Location = new System.Drawing.Point(38, 173);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(38, 143);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(214, 39);
             this.btnCerrarSesion.TabIndex = 4;
@@ -62,6 +62,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormAdministrador";
             this.Text = "Menú Administrador";
+            this.Load += new System.EventHandler(this.FormAdministrador_Load);
             this.ResumeLayout(false);
 
         }

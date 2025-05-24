@@ -53,6 +53,12 @@
     <Compile Include="FormAdministrador.Designer.cs">
       <DependentUpon>FormAdministrador.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAutorizaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAutorizaciones.Designer.cs">
+      <DependentUpon>FormAutorizaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCambioClave.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAdministrador.resx">
       <DependentUpon>FormAdministrador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAutorizaciones.resx">
+      <DependentUpon>FormAutorizaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCambioClave.resx">
       <DependentUpon>FormCambioClave.cs</DependentUpon>
