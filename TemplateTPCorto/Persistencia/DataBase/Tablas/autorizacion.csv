@@ -1,1 +1,7 @@
 idOperacion;tipoOperacion;estado;legajoSolicitante;fechaSolicitud;legajoAutorizador;fechaAutorizacion
+1;Persona;APROBADO;2448;24/5/2025;2034;24/5/2025
+2;Credencial;APROBADO;1500;24/5/2025;2034;24/5/2025
+3;Credencial;APROBADO;2034;24/5/2025;2034;24/5/2025
+4;Credencial;APROBADO;1234;24/5/2025;2034;24/5/2025
+5;Persona;APROBADO;2448;24/5/2025;2034;24/5/2025
+6;Credencial;APROBADO;2448;24/5/2025;2034;24/5/2025
