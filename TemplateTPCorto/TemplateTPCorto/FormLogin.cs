@@ -94,7 +94,7 @@ namespace TemplateTPCorto
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            // No hace falta poner nada acá por ahora
+            
         }
 
         private void label3_Click(object sender, EventArgs e)

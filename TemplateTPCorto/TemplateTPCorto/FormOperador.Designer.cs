@@ -28,12 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnCargarVenta = new System.Windows.Forms.Button();
+            this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnCargarVenta
+            // 
+            this.btnCargarVenta.Location = new System.Drawing.Point(34, 27);
+            this.btnCargarVenta.Name = "btnCargarVenta";
+            this.btnCargarVenta.Size = new System.Drawing.Size(140, 38);
+            this.btnCargarVenta.TabIndex = 0;
+            this.btnCargarVenta.Text = "Cargar Venta";
+            this.btnCargarVenta.UseVisualStyleBackColor = true;
+            this.btnCargarVenta.Click += new System.EventHandler(this.btnCargarVenta_Click);
+            // 
+            // btnCerrarSesion
+            // 
+            this.btnCerrarSesion.Location = new System.Drawing.Point(34, 80);
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.Size = new System.Drawing.Size(140, 38);
+            this.btnCerrarSesion.TabIndex = 1;
+            this.btnCerrarSesion.Text = "Cerrar Sesión";
+            this.btnCerrarSesion.UseVisualStyleBackColor = true;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
+            // 
+            // FormOperador
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(205, 149);
+            this.Controls.Add(this.btnCerrarSesion);
+            this.Controls.Add(this.btnCargarVenta);
+            this.Name = "FormOperador";
             this.Text = "FormOperador";
+            this.Load += new System.EventHandler(this.FormOperador_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnCargarVenta;
+        private System.Windows.Forms.Button btnCerrarSesion;
     }
 }

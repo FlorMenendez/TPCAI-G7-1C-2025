@@ -16,5 +16,24 @@ namespace TemplateTPCorto
         {
             InitializeComponent();
         }
+
+        private void btnCargarVenta_Click(object sender, EventArgs e)
+        {
+            this.Hide(); 
+            FormVentas formVentas = new FormVentas();
+            formVentas.ShowDialog();
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            FormLogin formLogin = new FormLogin();
+            formLogin.Show();
+            this.Close(); 
+        }
+
+        private void FormOperador_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
